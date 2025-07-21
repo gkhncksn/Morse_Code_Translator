@@ -7,16 +7,13 @@ import time
 import math
 import random
 
-# NumPy'yi import etmeyi dene, yoksa alternatif çözüm kullan
 try:
     import pygame.sndarray
     import numpy as np
     USE_NUMPY = True
 except ImportError:
     USE_NUMPY = False
-    print("NumPy bulunamadı. Basit ses efektleri kullanılacak.")
 
-# Pygame başlatma
 pygame.init()
 pygame.mixer.init()
 
@@ -34,10 +31,8 @@ morse_code_dict = {'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.',
                    '_': '..--.-', '"': '.-..-.', '$': '...-..-', '@': '.--.-.', ' ': '/'
                    }
 
-# Reverse Morse Code Dictionary
 reverse_morse_code_dict = {v: k for k, v in morse_code_dict.items()}
 
-# Mors Kodu Eğitim Setleri
 morse_lessons = {
     "Temel Harfler": ["E", "T", "A", "O", "I", "N"],
     "Kolay Harfler": ["S", "H", "R", "D", "L", "U"],
@@ -587,20 +582,16 @@ window.geometry("500x680")
 window.protocol("WM_DELETE_WINDOW", on_closing)
 style = Style(theme="cosmo")
 
-# Ana ekran
 home_frame = ttk.Frame(window, padding="20")
 home_frame.pack(fill="both", expand=True)
 
-# Başlık
 title_frame = ttk.Frame(home_frame)
 title_frame.pack(pady=(0, 20))
 
-home_label = ttk.Label(title_frame, text="🎯 Mors Kodu Merkezi", 
-                       font=('Segoe UI', 28, 'bold'))
+home_label = ttk.Label(title_frame, text="🎯 Mors Kodu Merkezi", font=('Segoe UI', 28, 'bold'))
 home_label.pack()
 
-subtitle_label = ttk.Label(title_frame, text="Öğrenin • Pratik Yapın • Çevirin", 
-                          font=('Segoe UI', 14))
+subtitle_label = ttk.Label(title_frame, text="Öğrenin • Pratik Yapın • Çevirin", font=('Segoe UI', 14))
 subtitle_label.pack(pady=(5, 0))
 
 # Ana butonlar - 2x3 grid
@@ -611,28 +602,23 @@ buttons_frame.pack(pady=20)
 left_col = ttk.Frame(buttons_frame)
 left_col.pack(side=tk.LEFT, padx=20)
 
-text_to_morse_btn = ttk.Button(left_col, text="📝 Metin → Mors Kodu\n(Görsel + Ses)", 
-                               command=show_text_to_morse, width=25)
+text_to_morse_btn = ttk.Button(left_col, text="📝 Metin → Mors Kodu\n(Görsel + Ses)", command=show_text_to_morse, width=25)
 text_to_morse_btn.pack(pady=8)
 
-morse_to_text_btn = ttk.Button(left_col, text="📻 Mors Kodu → Metin", 
-                               command=show_morse_code_to_text, width=25)
+morse_to_text_btn = ttk.Button(left_col, text="📻 Mors Kodu → Metin", command=show_morse_code_to_text, width=25)
 morse_to_text_btn.pack(pady=8)
 
-table_btn = ttk.Button(left_col, text="📚 Mors Alfabesi Tablosu", 
-                       command=show_morse_table, width=25)
+table_btn = ttk.Button(left_col, text="📚 Mors Alfabesi Tablosu", command=show_morse_table, width=25)
 table_btn.pack(pady=8)
 
 # Sağ kolon
 right_col = ttk.Frame(buttons_frame)
 right_col.pack(side=tk.LEFT, padx=20)
 
-practice_btn = ttk.Button(right_col, text="🎮 Pratik Modu\n(Öğrenme Oyunu)", 
-                          command=show_practice_mode, width=25)
+practice_btn = ttk.Button(right_col, text="🎮 Pratik Modu\n(Öğrenme Oyunu)", command=show_practice_mode, width=25)
 practice_btn.pack(pady=8)
 
-speed_btn = ttk.Button(right_col, text="⚡ Hız Testi\n(WPM Ölçümü)", 
-                       command=show_speed_test, width=25)
+speed_btn = ttk.Button(right_col, text="⚡ Hız Testi\n(WPM Ölçümü)", command=show_speed_test, width=25)
 speed_btn.pack(pady=8)
 
 # Bilgi paneli
@@ -650,15 +636,13 @@ info_text.pack()
 # Çeviri ekranı
 translation_frame = ttk.Frame(window, padding="20")
 
-translation_label = ttk.Label(translation_frame, text="Input Text:", 
-                              font=('Segoe UI', 16, 'bold'))
+translation_label = ttk.Label(translation_frame, text="Input Text:", font=('Segoe UI', 16, 'bold'))
 translation_label.pack(pady=(0, 10))
 
 input_text = tk.Text(translation_frame, height=4, font=('Consolas', 12), wrap=tk.WORD)
 input_text.pack(pady=(0, 10), fill="x")
 
-output_text_label = ttk.Label(translation_frame, text="🎯 Çıktı:",
-                              font=('Segoe UI', 16, 'bold'))
+output_text_label = ttk.Label(translation_frame, text="🎯 Çıktı:", font=('Segoe UI', 16, 'bold'))
 output_text_label.pack(pady=(10, 5))
 
 output_text = tk.Text(translation_frame, height=4, font=('Consolas', 12), wrap=tk.WORD)
@@ -680,8 +664,7 @@ clear_button.pack(side=tk.LEFT, padx=5)
 # Mors Alfabesi Tablosu Ekranı
 table_frame = ttk.Frame(window, padding="20")
 
-table_title = ttk.Label(table_frame, text="📚 Mors Alfabesi Tablosu", 
-                        font=('Segoe UI', 20, 'bold'))
+table_title = ttk.Label(table_frame, text="📚 Mors Alfabesi Tablosu", font=('Segoe UI', 20, 'bold'))
 table_title.pack(pady=(0, 20))
 
 # Tablo için notebook (sekmeler)
@@ -711,23 +694,19 @@ for category, chars in morse_lessons.items():
         char_frame = ttk.LabelFrame(row_frame, text=char, padding="10")
         char_frame.pack(side=tk.LEFT, padx=5, fill="x", expand=True)
         
-        morse_label = ttk.Label(char_frame, text=morse_code_dict.get(char, "?"), 
-                               font=('Consolas', 16, 'bold'))
+        morse_label = ttk.Label(char_frame, text=morse_code_dict.get(char, "?"), font=('Consolas', 16, 'bold'))
         morse_label.pack()
 
-table_back_btn = ttk.Button(table_frame, text="🏠 Ana Sayfaya Dön", 
-                           command=show_home_screen)
+table_back_btn = ttk.Button(table_frame, text="🏠 Ana Sayfaya Dön", command=show_home_screen)
 table_back_btn.pack(pady=10)
 
 # Pratik Modu Ekranı (656. satırdan devam)
 practice_frame = ttk.Frame(window, padding="20")
 
-practice_title = ttk.Label(practice_frame, text="🎮 Pratik Modu - Öğrenme Oyunu", 
-                          font=('Segoe UI', 20, 'bold'))
+practice_title = ttk.Label(practice_frame, text="🎮 Pratik Modu - Öğrenme Oyunu", font=('Segoe UI', 20, 'bold'))
 practice_title.pack(pady=(0, 20))
 
-practice_question_label = ttk.Label(practice_frame, text="Soru yükleniyor...", 
-                                   font=('Segoe UI', 14), justify="center")
+practice_question_label = ttk.Label(practice_frame, text="Soru yükleniyor...", font=('Segoe UI', 14), justify="center")
 practice_question_label.pack(pady=20)
 
 practice_entry = ttk.Entry(practice_frame, font=('Segoe UI', 16), width=10, justify="center")
@@ -738,34 +717,28 @@ practice_entry.bind('<Return>', lambda event: check_practice_answer())
 practice_button_frame = ttk.Frame(practice_frame)
 practice_button_frame.pack(pady=15)
 
-practice_check_btn = ttk.Button(practice_button_frame, text="✅ Cevapla", 
-                               command=check_practice_answer)
+practice_check_btn = ttk.Button(practice_button_frame, text="✅ Cevapla", command=check_practice_answer)
 practice_check_btn.pack(side=tk.LEFT, padx=5)
 
-practice_skip_btn = ttk.Button(practice_button_frame, text="⏭️ Atla", 
-                              command=generate_practice_question)
+practice_skip_btn = ttk.Button(practice_button_frame, text="⏭️ Atla", command=generate_practice_question)
 practice_skip_btn.pack(side=tk.LEFT, padx=5)
 
 practice_result_label = ttk.Label(practice_frame, text="", font=('Segoe UI', 12, 'bold'))
 practice_result_label.pack(pady=10)
 
-practice_score_label = ttk.Label(practice_frame, text="Skor: 0/0", 
-                                font=('Segoe UI', 12))
+practice_score_label = ttk.Label(practice_frame, text="Skor: 0/0", font=('Segoe UI', 12))
 practice_score_label.pack(pady=5)
 
-practice_back_btn = ttk.Button(practice_frame, text="🏠 Ana Sayfaya Dön", 
-                              command=show_home_screen)
+practice_back_btn = ttk.Button(practice_frame, text="🏠 Ana Sayfaya Dön", command=show_home_screen)
 practice_back_btn.pack(pady=20)
 
 # Hız Testi Ekranı
 speed_frame = ttk.Frame(window, padding="20")
 
-speed_title = ttk.Label(speed_frame, text="⚡ Hız Testi - WPM Ölçümü", 
-                       font=('Segoe UI', 20, 'bold'))
+speed_title = ttk.Label(speed_frame, text="⚡ Hız Testi - WPM Ölçümü", font=('Segoe UI', 20, 'bold'))
 speed_title.pack(pady=(0, 20))
 
-speed_test_question = ttk.Label(speed_frame, text="Başlamak için 'Test Başlat' butonuna basın", 
-                               font=('Segoe UI', 14), justify="center")
+speed_test_question = ttk.Label(speed_frame, text="Başlamak için 'Test Başlat' butonuna basın", font=('Segoe UI', 14), justify="center")
 speed_test_question.pack(pady=20)
 
 speed_test_entry = tk.Text(speed_frame, height=3, font=('Consolas', 12), wrap=tk.WORD)
@@ -774,20 +747,16 @@ speed_test_entry.pack(pady=10, fill="x")
 speed_button_frame = ttk.Frame(speed_frame)
 speed_button_frame.pack(pady=15)
 
-speed_start_btn = ttk.Button(speed_button_frame, text="🚀 Test Başlat", 
-                            command=start_speed_test)
+speed_start_btn = ttk.Button(speed_button_frame, text="🚀 Test Başlat", command=start_speed_test)
 speed_start_btn.pack(side=tk.LEFT, padx=5)
 
-speed_check_btn = ttk.Button(speed_button_frame, text="✅ Kontrol Et", 
-                            command=check_speed_test)
+speed_check_btn = ttk.Button(speed_button_frame, text="✅ Kontrol Et", command=check_speed_test)
 speed_check_btn.pack(side=tk.LEFT, padx=5)
 
-speed_test_result = ttk.Label(speed_frame, text="", font=('Segoe UI', 12, 'bold'), 
-                             justify="center")
+speed_test_result = ttk.Label(speed_frame, text="", font=('Segoe UI', 12, 'bold'), justify="center")
 speed_test_result.pack(pady=20)
 
-speed_back_btn = ttk.Button(speed_frame, text="🏠 Ana Sayfaya Dön", 
-                           command=show_home_screen)
+speed_back_btn = ttk.Button(speed_frame, text="🏠 Ana Sayfaya Dön", command=show_home_screen)
 speed_back_btn.pack(pady=10)
 
 # Hız testi bilgi paneli
@@ -803,13 +772,9 @@ speed_info_text = ttk.Label(speed_info_frame,
                            font=('Segoe UI', 10), justify="left")
 speed_info_text.pack()
 
-# Program başlatma
 if __name__ == "__main__":
     try:
-        # İlk ekranı göster
         show_home_screen()
-        
-        # Pencereyi başlat
         window.mainloop()
         
     except KeyboardInterrupt:
@@ -820,7 +785,6 @@ if __name__ == "__main__":
         messagebox.showerror("❌ Hata", f"Beklenmeyen hata: {e}")
         
     finally:
-        # Temizlik
         if morse_visualizer:
             morse_visualizer.close()
         try:
